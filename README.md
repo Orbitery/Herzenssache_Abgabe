@@ -33,7 +33,7 @@ Multi-Class Problem:
 
 Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt:
 
-| Argument | Default Value | Info |
+| Argument | Default  Value | Info |
 | --- | --- | --- |
 | `--modelname` | Resnet | ---. |
 | `--bin` | True | Binäre Darstellung. ---. |
