@@ -4,9 +4,6 @@ Dieses Repository enthält den Code für die automatische Erkennung von Vorhoffl
 ## Erste Schritte
 Die erforderlichen packages können aus der [`requirements.txt`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/requirements.txt) Datei entnommen werden.
 ### Installation
-abc
-### Abhängigkeiten
-
 Die erforderlichen Abhängigkeiten können mit dem folgenden Befehl installiert werden:
 ```
 git clone xyz
