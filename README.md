@@ -60,8 +60,7 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 ## Verweise
 
--Resnet Quelle
--XGBoost Quelle
-- Paper CNN Ansatz
+- Resnet Quelle (Idee: https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3 , Architecture / Codeursprung: https://github.com/spdrnl/ecg/blob/master/ECG.ipynb
+- Paper CNN Ansatz ("ECG Heartbeat Classification Using Convolutional Neural Networks" von Xu und Liu, 2020)
 - Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
 - Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
