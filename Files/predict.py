@@ -55,7 +55,7 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
 
     #------------------------------------------------------------------------------
     # Euer Code ab hier 
-    is_binary_classifier = False 
+    is_binary_classifier = True 
     #Load Model 
     model = modelload(is_binary_classifier,model_name)
 
