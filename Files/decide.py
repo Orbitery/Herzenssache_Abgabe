@@ -1,5 +1,5 @@
-
-def decider(predicted, ecg_names, is_binary_classifier):
+import numpy as np
+def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
     data_samples = np.array(data_samples)
     data_samples = data_samples.reshape((*data_samples.shape, 1))
 

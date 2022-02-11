@@ -16,19 +16,20 @@ def Saver(model,bin,modelname):
         except:
             print ("Unable to write summary")
 
-        if (bin==True):
+        if (bin=="True"):
             if os.path.exists("./CNN_bin/model_bin.hdf5"):
                 os.remove("./CNN_bin/model_bin.hdf5")
             else:
                 pass
             model.save("./CNN_bin/model_bin.hdf5")
-
-        elif (bin==False):
+            print("Binary CNN Model saved")
+        elif (bin=="False"):
             if os.path.exists("./CNN_multi/model_multi.hdf5"):
                 os.remove("./CNN_multi/model_multi.hdf5")
             else:
                 pass
             model.save("./CNN_multi/model_multi.hdf5")
+            print("Multilabel CNN Model saved")
     elif(modelname=="LSTM"):
         if not os.path.exists("./LSTM_bin/"):
             os.mkdir("./LSTM_bin/")
@@ -44,19 +45,21 @@ def Saver(model,bin,modelname):
         except:
             print ("Unable to write summary")
 
-        if (bin==True):
+        if (bin=="True"):
             if os.path.exists("./LSTM_bin/model_bin.hdf5"):
                 os.remove("./LSTM_bin/model_bin.hdf5")
             else:
                 pass
+            print("Binary LSTM Model saved")
             model.save("./LSTM_bin/model_bin.hdf5")
 
-        elif (bin==False):
+        elif (bin=="False"):
             if os.path.exists("./LSTM_multi/model_multi.hdf5"):
                 os.remove("./LSTM_multi/model_multi.hdf5")
             else:
                 pass
             model.save("./LSTM_multi/model_multi.hdf5")
+            print("Multilabel LSTM Model saved")
     elif(modelname=="RandomForrest"):
         if not os.path.exists("./RF_bin/"):
             os.mkdir("./RF_bin/")
@@ -72,16 +75,48 @@ def Saver(model,bin,modelname):
         except:
             print ("Unable to write summary")
 
-        if (bin==True):
+        if (bin=="True"):
             if os.path.exists("./RF_bin/random_forest.joblib"):
                 os.remove("./RF_bin/random_forest.joblib")
             else:
                 pass
             joblib.dump(model, "./RF_bin/random_forest.joblib")
+            print("Binary RF Model saved")
 
-        elif (bin==False):
+        elif (bin=="False"):
             if os.path.exists("./RF_multi/random_forest.joblib"):
                 os.remove("./RF_multi/random_forest.joblib")
             else:
                 pass
             joblib.dump(model, "./RF_bin/random_forest.joblib")
+            print("Multilabel RF Model saved")
+    elif(modelname=="Resnet"):
+        if not os.path.exists("./Resnet_bin/"):
+            os.mkdir("./Resnet_bin/")
+        else:
+            pass
+        if not os.path.exists("./Resnet_multi/"):
+            os.mkdir("./Resnet_multi/")
+        else:
+            pass
+        try:    
+            with open('./Resnet_bin/modelsummary.txt', 'w') as f:
+                model.summary(print_fn=lambda x: f.write(x + '\n'))
+        except:
+            print ("Unable to write summary")
+
+        if (bin=="True"):
+            if os.path.exists("./Resnet_bin/model_bin.hdf5"):
+                os.remove("./Resnet_bin/model_bin.hdf5")
+            else:
+                pass
+            model.save("./Resnet_bin/model_bin.hdf5")
+            print("Binary Resnet Model saved")
+
+        elif (bin=="False"):
+            if os.path.exists("./Resnet_multi/model_multi.hdf5"):
+                os.remove("./Resnet_multi/model_multi.hdf5")
+            else:
+                pass
+            model.save("./Resnet_multi/model_multi.hdf5")
+            print("Multilabel Resnet Model saved")

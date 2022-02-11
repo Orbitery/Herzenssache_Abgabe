@@ -54,62 +54,34 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
     '''
 
     #------------------------------------------------------------------------------
-    # Euer Code ab hier  
-
+    # Euer Code ab hier 
+    is_binary_classifier = False 
     model = modelload(is_binary_classifier,model_name)
-    
 
+    data_names = []
+    data_samples = []
+    r_peaks_list = []
 
+    detectors = Detectors(fs)  
+    for idx, ecg_lead in enumerate(ecg_leads):
+        ecg_lead = ecg_lead.astype('float')  # Wandel der Daten von Int in Float32 Format für CNN später
+        ecg_lead = (ecg_lead - ecg_lead.mean()) 
+        ecg_lead = ecg_lead / (ecg_lead.std() + 1e-08) 
+        r_peaks = detectors.hamilton_detector(ecg_lead)     # Detektion der QRS-Komplexe
+        for r_peak in r_peaks:
+            if r_peak > 150 and r_peak + 450 <= len(ecg_lead):
+                data_samples.append(ecg_lead[r_peak - 150:r_peak + 450]) #Einzelne Herzschläge werden separiert und als Trainingsdaten der Länge 300 abgespeichert
+                data_names.append(ecg_names[idx])
 
+    data_samples = np.array(data_samples)
+    data_samples = data_samples.reshape((*data_samples.shape, 1))
 
-    if (model_name == "CNN"):
-        if (is_binary_classifier==True):  #Beginn des binären Klassifizierers
-            cnn_model = load_model("./CNN_Model/model_bin.hdf5")
-            print('Model Loaded!')
-
-            data_names = []
-            data_samples = []
-            r_peaks_list = []
-
-            detectors = Detectors(fs)  
-            for idx, ecg_lead in enumerate(ecg_leads):
-                ecg_lead = ecg_lead.astype('float')  # Wandel der Daten von Int in Float32 Format für CNN später
-                ecg_lead = (ecg_lead - ecg_lead.mean()) 
-                ecg_lead = ecg_lead / (ecg_lead.std() + 1e-08)  
-                r_peaks = detectors.hamilton_detector(ecg_lead)     # Detektion der QRS-Komplexe
-                sdnn = np.std(np.diff(r_peaks)/fs*1000)             # Berechnung der Standardabweichung der Schlag-zu-Schlag Intervalle (SDNN) in Millisekunden
-                for r_peak in r_peaks:
-                    if r_peak > 150 and r_peak + 150 <= len(ecg_lead):
-                        data_samples.append(ecg_lead[r_peak - 150:r_peak + 150])
-                        data_names.append(ecg_names[idx])
-
-
-            predicted = model.predict(data_samples)
-            predictions = decider(predicted, ecg_names,data_samples, is_binary_classifier)
-           
-
-
-
-        elif(is_binary_classifier==False):   #Beginn des Multilabel-Klassifizierers
-            cnn_model = load_model("./CNN_Model/model_multi.hdf5")
-            print('Model Loaded!')
-            data_names = []
-            data_samples = []
-            r_peaks_list = []
-
-            detectors = Detectors(fs)  
-            for idx, ecg_lead in enumerate(ecg_leads):
-                ecg_lead = ecg_lead.astype('float')  # Wandel der Daten von Int in Float32 Format für CNN später
-                r_peaks = detectors.hamilton_detector(ecg_lead)     # Detektion der QRS-Komplexe
-                sdnn = np.std(np.diff(r_peaks)/fs*1000)             # Berechnung der Standardabweichung der Schlag-zu-Schlag Intervalle (SDNN) in Millisekunden
-                for r_peak in r_peaks:
-                    if r_peak > 150 and r_peak + 150 <= len(ecg_lead):
-                        data_samples.append(ecg_lead[r_peak - 150:r_peak + 150])
-                        data_names.append(ecg_names[idx])
-
-
-            predicted = model.predict(data_samples) # Hier auch
-            predictions = decider(predicted, ecg_names,data_samples, is_binary_classifier)
+    predictions = list()
+    label_predicted = []
+    label_predicted_democatric = []
+    predicted = model.predict(data_samples)
+    predictions = decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier)
+       
                 
     #------------------------------------------------------------------------------    
     return predictions # Liste von Tupels im Format (ecg_name,label) - Muss unverändert bleiben!

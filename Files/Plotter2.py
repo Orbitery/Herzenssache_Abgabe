@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 def plot_creater(history,bin, modelname):
     if (modelname=="CNN" or modelname=="LSTM"):
-        if (bin=="True"):
+        if (bin==True):
         
             plt.plot(history.history['accuracy'])
             plt.plot(history.history['val_accuracy'])
@@ -25,7 +25,7 @@ def plot_creater(history,bin, modelname):
             plt.close()
 
 
-        elif (bin=="False"):
+        elif (bin==False):
             plt.plot(history.history['accuracy'])
             plt.plot(history.history['val_accuracy'])
             plt.title('model accuracy')
@@ -46,17 +46,17 @@ def plot_creater(history,bin, modelname):
             plt.savefig('./CNN_multi/loss_val_bin.png')
             plt.savefig('./CNN_multi/loss_val_bin.pdf')
             plt.close()
-    elif (modelname == "Resnet"):
-        if (bin == "True"):
+    elif (modelname == "resnet"):
+        if (bin == True):
 
-            plt.plot(history.history['accuracy'])
-            plt.plot(history.history['val_accuracy'])
+            plt.plot(history.history['acc'])
+            plt.plot(history.history['val_acc'])
             plt.title('model accuracy')
             plt.ylabel('accuracy')
             plt.xlabel('epoch')
             plt.legend(['train', 'val'], loc='upper left')
-            plt.savefig('./resnet_bin/acc_val_bin.png')
-            plt.savefig('./resnet_bin/acc_val_bin.pdf')
+            plt.savefig('./resnet_Model/acc_val_bin.png')
+            plt.savefig('./resnet_Model/acc_val_bin.pdf')
             plt.close()
 
             plt.plot(history.history['loss'])
@@ -66,20 +66,20 @@ def plot_creater(history,bin, modelname):
             plt.xlabel('epoch')
             plt.legend(['train', 'val'], loc='upper left')
 
-            plt.savefig('./resnet_bin/loss_val_bin.png')
-            plt.savefig('./resnet_bin/loss_val_bin.pdf')
+            plt.savefig('./resnet_Model/loss_val_bin.png')
+            plt.savefig('./resnet_Model/loss_val_bin.pdf')
             plt.close()
 
 
-        elif (bin == "False"):
-            plt.plot(history.history['accuracy'])
-            plt.plot(history.history['val_accuracy'])
+        elif (bin == False):
+            plt.plot(history.history['acc'])
+            plt.plot(history.history['val_acc'])
             plt.title('model accuracy')
             plt.ylabel('accuracy')
             plt.xlabel('epoch')
             plt.legend(['train', 'val'], loc='upper left')
-            plt.savefig('./resnet_multi/acc_val_multi.png')
-            plt.savefig('./resnet_multi/acc_val_multi.pdf')
+            plt.savefig('./resnet_Model/acc_val_multi.png')
+            plt.savefig('./resnet_Model/acc_val_multi.pdf')
             plt.close()
 
             plt.plot(history.history['loss'])
@@ -89,8 +89,8 @@ def plot_creater(history,bin, modelname):
             plt.xlabel('epoch')
             plt.legend(['train', 'val'], loc='upper left')
 
-            plt.savefig('./resnet_multi/loss_val_multi.png')
-            plt.savefig('./resnet_multi/loss_val_multi.pdf')
+            plt.savefig('./resnet_Model/loss_val_multi.png')
+            plt.savefig('./resnet_Model/loss_val_multi.pdf')
             plt.close()
 
     else:

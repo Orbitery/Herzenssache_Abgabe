@@ -72,3 +72,45 @@ def RandomForrest(X_train, y_train, X_test, y_test):
     accuracy = metrics.accuracy_score(y_test,m.predict(X_test))
     print ("Acc is {}".format(accuracy))
     return (m, history)
+
+def Resnet(X_train, y_train, X_test, y_test):
+    print("Resnet Model was chosen")
+    callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
+    def get_resnet_model(categories=2):
+        def residual_block(X, kernels, stride):
+            out = tf.keras.layers.Conv1D(kernels, stride, padding='same')(X)
+            out = tf.keras.layers.ReLU()(out)
+            out = tf.keras.layers.Conv1D(kernels, stride, padding='same')(out)
+            out = tf.keras.layers.add([X, out])
+            out = tf.keras.layers.ReLU()(out)
+            out = tf.keras.layers.MaxPool1D(5, 2)(out)
+            return out
+
+        kernels = 32
+        stride = 5
+
+        inputs = tf.keras.layers.Input(shape=(X_train.shape[1],1))
+        X = tf.keras.layers.Conv1D(kernels, stride)(inputs)
+        X = residual_block(X, kernels, stride)
+        X = residual_block(X, kernels, stride)
+        X = residual_block(X, kernels, stride)
+        X = residual_block(X, kernels, stride)
+        X = residual_block(X, kernels, stride)
+        X = tf.keras.layers.Flatten()(X)
+        X = tf.keras.layers.Dense(32, activation='relu')(X)
+        X = tf.keras.layers.Dense(32, activation='relu')(X)
+        output = tf.keras.layers.Dense(y_train.shape[1], activation='softmax')(X)
+
+        model = tf.keras.Model(inputs=inputs, outputs=output)
+        return model
+
+    model = get_resnet_model()
+    model.compile(optimizer='adam', loss=tf.keras.losses.categorical_crossentropy, metrics=['accuracy'])
+
+
+    history = model.fit(X_train, y_train, epochs=3,validation_data=(X_test, y_test), batch_size=1028, callbacks=[callback])
+    model.build(input_shape=(X_train.shape[1],1))
+    model.summary()
+    score = model.evaluate(X_test, y_test)
+    print("Accuracy Score: "+str(round(score[1],4)))
+    return (model, history)

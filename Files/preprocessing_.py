@@ -71,7 +71,7 @@ def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
                 #pass
 
         tf.keras.layers.Softmax(axis=-1)
-        if(modelname=="CNN" or modelname=="LSTM"):
+        if(modelname=="CNN" or modelname=="LSTM" or modelname=="Resnet"):
             # Klassen in one-hot-encoding konvertieren
             # 'N' --> Klasse 0
             # 'A' --> Klasse 1
@@ -100,7 +100,7 @@ def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
                 #pass
 
 
-        if(modelname=="CNN" or modelname=="LSTM"):
+        if(modelname=="CNN" or modelname=="LSTM"  or modelname=="Resnet"):
             # Klassen in one-hot-encoding konvertieren
             # 'N' --> Klasse 0
             # 'A' --> Klasse 1

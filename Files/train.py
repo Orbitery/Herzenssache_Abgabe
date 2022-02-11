@@ -25,7 +25,7 @@ from wettbewerb import load_references
 
 ### if __name__ == '__main__':  # bei multiprocessing auf Windows notwendig
 parser = argparse.ArgumentParser(description='Train given Model')
-parser.add_argument('--modelname', action='store',type=str,default='CNN')
+parser.add_argument('--modelname', action='store',type=str,default='Resnet')
 parser.add_argument('--bin', action='store',type=str,default='True')
 parser.add_argument('--pca_active', action='store',type=str,default="False")
 
@@ -48,7 +48,7 @@ train_labels,train_samples,r_peaks_list,X_train, y_train, X_test, y_test = Prepr
 
 #Check if PCA should be performed to reduce Features
 if (pca_active=="True"):
-    X_train, X_test = PCA_function(X_train,X_test)
+    X_train, X_test = PCA_function(X_train,X_test,modelname)
 
 
 start = time.perf_counter()
@@ -60,6 +60,8 @@ elif(modelname=="LSTM"):
     model, history = LSTM(X_train, y_train, X_test, y_test)
 elif (modelname=="RandomForrest"):
     model, history = RandomForrest(X_train, y_train, X_test, y_test)
+elif (modelname=="Resnet"):
+    model, history = Resnet(X_train, y_train, X_test, y_test)
 
 
 
