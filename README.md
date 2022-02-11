@@ -2,11 +2,8 @@
 Dieses Repository enthält den Code für die automatische Erkennung von Vorhofflimmern aus kurzen EKG-Segmenten mittels Deep Learning. Diese Arbeit wurde im Rahmen des Wettbewerbs "Wettbewerb künstliche Intelligenz in der Medizin" an der TU Darmstadt (KIS*MED, Prof. Hoog Antink) durchgeführt.
 
 ## Erste Schritte
-Die erforderlichen packages können aus der requirements.txt Datei entnommen werden.
+Die erforderlichen packages können aus der [`requirements.txt`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/requirements.txt) Datei entnommen werden.
 ### Installation
-abc
-### Abhängigkeiten
-
 Die erforderlichen Abhängigkeiten können mit dem folgenden Befehl installiert werden:
 ```
 git clone xyz
@@ -16,42 +13,36 @@ cd ecg_classification/pade_activation_unit/cuda
 python setup.py install
 cd ../../../
 ```
-## Verwendung
-
-1. Repository klonen `git clone https://...`
-2. README bearbeiten `subl README.md`
-3. Änderungen einchecken `git add README.md` und committen `git commit -m "Update README"`
-
 ## Funktionen
 
 Binäres Problem:
-- python predict_pretrained.py --model_name CNN_bin
+- python `predict_pretrained.py` `--model_name` CNN_bin 
 
 Multi-Class Problem:
-- python predict_pretrained.py --model_name CNN_multi
+- python `predict_pretrained.py` `--model_name` CNN_multi
 
 
 Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt:
 
 | Argument | Default  Value | Info |
 | --- | --- | --- |
-| `--modelname` | Resnet | ---. |
-| `--bin` | True | Binäre Darstellung. ---. |
-| `--pca_active` | False | Binäre Darstellung. ---. |
-| `--epochs` | 10 | Ein Vorwärtsdurchlauf und ein Rückwärtsdurchlauf aller Trainingsbeispiele. |
-| `--batch_size` | 512 | Die Anzahl der Trainingsbeispiele in einem Vorwärts-/Rückwärtsdurchlauf. |
+| `--modelname` | Resnet | Auswahl von verschiedenen Modellen anhand von Modellname. |
+| `--bin` | True | Binäre Darstellung. Unterscheidung zwischen binärer Klassifizierer und Multilabel. |
+| `--pca_active` | False | Binäre Darstellung. Option, ob Hauptkomponentenanalyse verwendet wird oder nicht. |
+| `--epochs` | 10 | Anzahl von Epochen beim Traininieren des Modells. |
+| `--batch_size` | 512 | Gibt die Batchsize zum Trainieren des Modells an. |
 
 
 Die Dateien
- - [`predict_pretrained.pyy`](predict_pretrained.py)
- - [`wettbewerb.py`](wettbewerb.py)
- - [`score.py`](score.py)
+ - [`predict_pretrained.pyy`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/predict_pretrained.py)
+ - [`wettbewerb.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/wettbewerb.py)
+ - [`score.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/score.py)
 
-stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von [Maurice Rohr](https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius). Die Funktion `predict_labels` in [`predict.py`](predict.py) beinhaltet das folgende Interface, welches für die Evaluierung verwendet wird.
+stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von [Maurice Rohr](https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius). Die Funktion `predict_labels` in [`predict.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/predict.py) beinhaltet das folgende Interface, welches für die Evaluierung verwendet wird.
 
 `predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]`
 
-In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResTNet enthalten. 
+In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResNet enthalten. 
 
 ## Daten
 
@@ -60,5 +51,31 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 ## Verweise
 
-- Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
-- Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+```
+[1] Resnet Ansatz: {De Roever 2020,
+        Titel={{Using ResNet for ECG time-series data}},
+        Autor={Sanne de Roever},
+        Veröffentlichung={https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3, Aufruf:12.01.2022},
+        Jahr={2020},
+}
+```
+
+```
+[2] Resnet Architektur: {De Roever 2020,
+        Titel={{Replication study of "ECG Heartbeat Classification: A Deep Transferable Representation}},
+        Autor={Sanne de Roever},
+        Veröffentlichung={https://github.com/spdrnl/ecg/blob/master/ECG.ipynb, Aufruf:12.01.2022},
+        Jahr={2020}
+}
+```
+
+```
+[3] CNN Ansatz: {Liu 2017,
+        Titel={{ECG Heartbeat Classification UsingConvolutional Neural Networks}},
+        Autor={Xuexiang Xuand, Hongxing Liu},
+        Veröffentlichung={IEEE Access (Volume:8)},
+        Seiten={8614-8619},
+        Jahr={2020},
+        Organisation={IEEE}
+}
+```
