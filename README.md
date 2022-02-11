@@ -70,7 +70,7 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 ```
 
 ```
-[3] CNN Ansatz: {Liu2017,
+[3] CNN Ansatz: {Liu 2017,
         Titel={{ECG Heartbeat Classification UsingConvolutional Neural Networks}},
         Autor={Xuexiang Xuand, Hongxing Liu},
         Veröffentlichung={IEEE Access (Volume:8)},
