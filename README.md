@@ -7,10 +7,9 @@ Die erforderlichen packages können aus der [`requirements.txt`](https://github.
 Die erforderlichen Abhängigkeiten können mit dem folgenden Befehl installiert werden:
 ```
 git clone xyz
-cd ECG_Classification
-pip install --no-deps -r requirements.txt -f 
-cd ecg_classification/pade_activation_unit/cuda
-python setup.py install
+cd Herzenssache_finale_Abgabe
+pip install -r requirements.txt -f 
+
 cd ../../../
 ```
 ## Funktionen
@@ -19,7 +18,7 @@ Insgesamt bietet unser Code folgende Modelle zur Auswahl:
 
 - CNN
 - LSTM
-- Resnet
+- ResNet
 - Random Forrest
 - XGBoost 
 
@@ -32,10 +31,10 @@ Resnet:
 Das Resnet wurde nach der Idee von Sanne de Roever [1] und mit Teilen des Codes von [3] entwickelt.
 
 Binäres Problem:
-- python `predict_pretrained.py` `--model_name` CNN_bin 
+- python `predict_pretrained.py` `--model_name` `Resnet` `--is_binary_classifier` `True`
 
 Multi-Class Problem:
-- python `predict_pretrained.py` `--model_name` CNN_multi
+- python `predict_pretrained.py` `--model_name` `Resnet` `--is_binary_classifier` `False`
 
 
 Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt:
@@ -47,6 +46,7 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 | `--pca_active` | False | Binäre Darstellung. Option, ob Hauptkomponentenanalyse verwendet wird oder nicht. |
 | `--epochs` | 10 | Anzahl von Epochen beim Traininieren des Modells. |
 | `--batch_size` | 512 | Gibt die Batchsize zum Trainieren des Modells an. |
+| `--treesize` | 50 | Gibt die Anzahl der Bäume des RandomForrest an |
 
 
 Die Dateien
@@ -58,7 +58,7 @@ stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-
 
 `predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]`
 
-In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResNet enthalten. 
+In `model_name` sind die Modelle CNN, LSTM, Random Forest, XGBoost & ResNet enthalten. 
 
 ## Daten
 
