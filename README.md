@@ -34,9 +34,9 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 
 
 Die Dateien
- - [`predict_pretrained.pyy`](predict_pretrained.py)
- - [`wettbewerb.py`](wettbewerb.py)
- - [`score.py`](score.py)
+ - [`predict_pretrained.pyy`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/predict_pretrained.py)
+ - [`wettbewerb.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/wettbewerb.py)
+ - [`score.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/score.py)
 
 stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von [Maurice Rohr](https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius). Die Funktion `predict_labels` in [`predict.py`](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/predict.py) beinhaltet das folgende Interface, welches für die Evaluierung verwendet wird.
 
