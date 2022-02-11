@@ -1,5 +1,12 @@
 import matplotlib.pyplot as plt
 def plot_creater(history,bin, modelname):
+    """[For the training progress, a chart about the accuracy / loss is created for the deep learning approaches and stored accordingly]
+
+    Args:
+        history (keras.callbacks.History object): [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model]
+        bin (String): [shows if binary ("True") or multilabel ("False") classification is active]
+        modelname (String): [Name of Model]
+    """
     if (modelname=="CNN" or modelname=="LSTM"):
         if (bin=="True"):
         
@@ -94,5 +101,5 @@ def plot_creater(history,bin, modelname):
             plt.close()
 
     else:
-        print("Kein Plot verfügbar")
+        print("No Plot available")
 

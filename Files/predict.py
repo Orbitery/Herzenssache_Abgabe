@@ -56,6 +56,7 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
     #------------------------------------------------------------------------------
     # Euer Code ab hier 
     is_binary_classifier = False 
+    #Load Model 
     model = modelload(is_binary_classifier,model_name)
 
     data_names = []
@@ -63,14 +64,15 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
     r_peaks_list = []
 
     detectors = Detectors(fs)  
+    #Preprocess the ecg data: Normalize the data and cut ecg signal into heartbeat-pairs with the length of 600
     for idx, ecg_lead in enumerate(ecg_leads):
-        ecg_lead = ecg_lead.astype('float')  # Wandel der Daten von Int in Float32 Format für CNN später
-        ecg_lead = (ecg_lead - ecg_lead.mean()) 
+        ecg_lead = ecg_lead.astype('float')  # Change data from Int to Float32 format
+        ecg_lead = (ecg_lead - ecg_lead.mean())  
         ecg_lead = ecg_lead / (ecg_lead.std() + 1e-08) 
-        r_peaks = detectors.hamilton_detector(ecg_lead)     # Detektion der QRS-Komplexe
-        for r_peak in r_peaks:
+        r_peaks = detectors.hamilton_detector(ecg_lead)      # Detection of the QRS complexes
+        for r_peak in r_peaks:                              #Single heartbeats are separated and stored as training data of length 600
             if r_peak > 150 and r_peak + 450 <= len(ecg_lead):
-                data_samples.append(ecg_lead[r_peak - 150:r_peak + 450]) #Einzelne Herzschläge werden separiert und als Trainingsdaten der Länge 300 abgespeichert
+                data_samples.append(ecg_lead[r_peak - 150:r_peak + 450]) 
                 data_names.append(ecg_names[idx])
 
     data_samples = np.array(data_samples)
@@ -79,8 +81,8 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
     predictions = list()
     label_predicted = []
     label_predicted_democatric = []
-    predicted = model.predict(data_samples)
-    predictions = decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier)
+    predicted = model.predict(data_samples)  #Prediction
+    predictions = decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier)   #Majority vote to move from heartbeat snippets to ECG classification
        
                 
     #------------------------------------------------------------------------------    

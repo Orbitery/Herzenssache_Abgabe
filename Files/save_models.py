@@ -1,6 +1,15 @@
 import os
 import joblib
+
 def Saver(model,bin,modelname):
+    """[A distinction is made between the different models and these are saved]
+
+    Args:
+        model (object): [ML Model]
+        bin (String): [shows if binary ("True") or multilabel ("False") classification is active]
+        modelname (String): [Modelname]
+    """
+
     if (modelname =="CNN"):
         if not os.path.exists("./CNN_bin/"):
             os.mkdir("./CNN_bin/")
@@ -120,3 +129,34 @@ def Saver(model,bin,modelname):
                 pass
             model.save("./Resnet_multi/model_multi.hdf5")
             print("Multilabel Resnet Model saved")
+    elif(modelname=="XGboost"):
+        if not os.path.exists("./xg_bin/"):
+            os.mkdir("./xg_bin/")
+        else:
+            pass    
+        if not os.path.exists("./xg_multi/"):
+            os.mkdir("./xg_multi/")
+        else:
+            pass
+        try:
+            with open('./xg_bin/modelsummary.txt', 'w') as f:
+                model.summary(print_fn=lambda x: f.write(x + '\n'))
+        except:
+            print ("Unable to write summary")
+
+        if (bin=="True"):
+            if os.path.exists("./xg_bin/xgboost.joblib"):
+                os.remove("./xg_bin/xgboost.joblib")
+            else:
+                pass
+            joblib.dump(model, "./xg_bin/xgboost.joblib")
+            print("Binary xgboost Model saved")
+
+        elif (bin=="False"):
+            if os.path.exists("./xg_multi/xgboost.joblib"):
+                os.remove("./xg_multi/xgboost.joblib")
+            else:
+                pass
+            joblib.dump(model, "./xg_multi/xgboost.joblib")
+            print("Multilabel xgboost Model saved")
+    

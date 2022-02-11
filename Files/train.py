@@ -25,10 +25,10 @@ from wettbewerb import load_references
 
 ### if __name__ == '__main__':  # bei multiprocessing auf Windows notwendig
 parser = argparse.ArgumentParser(description='Train given Model')
-parser.add_argument('--modelname', action='store',type=str,default='Resnet')
+parser.add_argument('--modelname', action='store',type=str,default='XGboost')
 parser.add_argument('--bin', action='store',type=str,default='True')
 parser.add_argument('--pca_active', action='store',type=str,default="False")
-parser.add_argument('--epochs', action='store',type=int,default="10")
+parser.add_argument('--epochs', action='store',type=int,default="2")
 parser.add_argument('--batchsize', action='store',type=int,default="512")
 
 
@@ -43,11 +43,7 @@ batchsize = args.batchsize
 ecg_leads,ecg_labels,fs,ecg_names = load_references("../training") # Importiere EKG-Dateien, zugehörige Diagnose, Sampling-Frequenz (Hz) und Name                                                # Sampling-Frequenz 300 Hz
 
 
-#pca_active = False
-#modelname="RandomForrest"
-#modelname="CNN"
-#modelname="LSTM"
-#bin = True
+
 
 train_labels,train_samples,r_peaks_list,X_train, y_train, X_test, y_test = Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin)
 
@@ -67,6 +63,9 @@ elif (modelname=="RandomForrest"):
     model, history = RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize)
 elif (modelname=="Resnet"):
     model, history = Resnet(X_train, y_train, X_test, y_test, epochs_, batchsize)
+elif (modelname=="XGboost"):
+    model, history = XGBoost(X_train, y_train, X_test, y_test, epochs_, batchsize)
+
 
 
 

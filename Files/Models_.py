@@ -4,23 +4,26 @@ from tensorflow.keras import datasets, layers, models
 import tensorflow as tf
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn import metrics
+import xgboost
 
 def CNN_Model(X_train, y_train, X_test, y_test, epochs_, batchsize):
-    '''
-    Parameters
-    ----------
-    ecg_leads : list of numpy-Arrays
-        EKG-Signale.
+    """[CNN Model - The architecture was based on the paper "ECG Heartbeat Classification Using Convolutional Neural Networks" by Xu and Liu, 2020]
 
-    Returns
-    -------
-    predictions : list of tuples
-        ecg_name und eure Diagnose
-    '''
+    Args:
+        X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+        y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+        X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+        y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+        epochs_ ([int]): [The number of epochs that the model is to be trained]
+        batchsize ([int]): [The batch size with which the model trains]
 
 
+    Returns:
+        model [keras object]: [Contains the trained model]
+        history [keras.callbacks.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model]    
+    """
     print("CNN Model was chosen")
-    #Definieren der CNN Architektur. Hierbei wurde sich bei der Architektur an dem Paper "ECG Heartbeat Classification Using Convolutional Neural Networks" von Xu und Liu, 2020 orientiert. 
+    
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
     model = models.Sequential()
     model.add(layers.GaussianNoise(0.1))
@@ -52,17 +55,20 @@ def CNN_Model(X_train, y_train, X_test, y_test, epochs_, batchsize):
     return (model, history)
 
 def LSTM(X_train, y_train, X_test, y_test, epochs_, batchsize):
-    '''
-    Parameters
-    ----------
-    ecg_leads : list of numpy-Arrays
-        EKG-Signale.
+    """[Simple LSTM network with three layers]
 
-    Returns
-    -------
-    predictions : list of tuples
-        ecg_name und eure Diagnose
-    '''
+    Args:
+        X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+        y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+        X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+        y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+        epochs_ ([int]): [The number of epochs that the model is to be trained]
+        batchsize ([int]): [The batch size with which the model trains]
+
+    Returns:
+        model [keras object]: [Contains the trained model]
+        history [keras.callbacks.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model]    
+    """
 
 
     print("LSTM Model was chosen")
@@ -86,19 +92,20 @@ def LSTM(X_train, y_train, X_test, y_test, epochs_, batchsize):
     return (model, history)
 
 def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize):
+    """[Function for the Random Forrest Classifier, which loads the Model]
 
-    '''
-    Parameters
-    ----------
-    ecg_leads : list of numpy-Arrays
-        EKG-Signale.
+    Args:
+        X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+        y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+        X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+        y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+        epochs_ ([int]): [The number of epochs that the model is to be trained]
+        batchsize ([int]): [The batch size with which the model trains]
 
-    Returns
-    -------
-    predictions : list of tuples
-        ecg_name und eure Diagnose
-    '''
-
+    Returns:
+        m [RandomForrestClassifier object]: [Contains the trained model]
+        history [RandomForrestClassifier.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model]    
+    """
 
     print("Random Forrest Model was chosen")
     X_train = X_train[:,:,0]
@@ -114,10 +121,48 @@ def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize):
     return (m, history)
 
 def Resnet(X_train, y_train, X_test, y_test, epochs_, batchsize):
+    """[ResNET Architecture. The idea for this came from the following article.https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3, Access: 11.02.2022 19:38 
+     And the code of the ResNET layer was largely taken from the following source https://github.com/spdrnl/ecg/blob/master/ECG.ipynb, Access: 11.02.2022 19:38]
+    
+    The model consists of:
+
+    1x Conv layer
+    5x Residual blocks
+    1x Flatten layer
+    3x Dense layer
+
+
+    Args:
+        X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+        y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+        X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+        y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+        epochs_ ([int]): [The number of epochs that the model is to be trained]
+        batchsize ([int]): [The batch size with which the model trains]
+
+    Returns:
+        model [keras object]: [Contains the trained model]
+        history [keras.callbacks.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model] 
+    """
     print("Resnet Model was chosen")
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
     def get_resnet_model():
+        """[Function to call the model]
+            Args:
+                X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+                y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+                X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+                y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+                epochs_ ([int]): [The number of epochs that the model is to be trained]
+                batchsize ([int]): [The batch size with which the model trains]
+
+            Returns:
+                model [keras object]: [Contains the trained model]
+                history [keras.callbacks.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model] 
+
+        """
         def residual_block(X, kernels, stride):
+            """[Residual block to more easily connect the layers one after the other] """
             out = tf.keras.layers.Conv1D(32, 5, padding='same')(X)
             out = tf.keras.layers.ReLU()(out)
             out = tf.keras.layers.Conv1D(32, 5, padding='same')(out)
@@ -144,7 +189,7 @@ def Resnet(X_train, y_train, X_test, y_test, epochs_, batchsize):
         model = tf.keras.Model(inputs=inputs, outputs=output)
         return model
 
-    model = get_resnet_model()
+    model = get_resnet_model() 
     model.compile(optimizer='adam', loss=tf.keras.losses.categorical_crossentropy, metrics=['accuracy'])
 
 
@@ -153,4 +198,26 @@ def Resnet(X_train, y_train, X_test, y_test, epochs_, batchsize):
     model.summary()
     score = model.evaluate(X_test, y_test)
     print("Accuracy Score: "+str(round(score[1],4)))
+    return (model, history)
+
+def XGBoost(X_train, y_train, X_test, y_test, epochs_, batchsize):
+    """[Simple XGBoost Model]
+
+    Args:
+        X_train ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for training purposes]
+        y_train ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for training purposes]
+        X_test ([numpy array]): [Numpy array, which contains the ECG signals of the heartbeat pairs for testing purposes]
+        y_test ([numpy array]): [Numpy array, which contains the classication of the ECG signals of the heartbeat pairs for testing purposes]
+        epochs_ ([int]): [The number of epochs that the model is to be trained]
+        batchsize ([int]): [The batch size with which the model trains]
+
+    Returns:
+        m [XGBClassifier object]: [Contains the trained model]
+        history [XGBClassifier.History object]: [Contains values accuracy, validation-accuracy, validation-loss and loss values during the training of the model]    
+    """
+
+    print("XGBoost Model was chosen")
+    X_train = X_train[:,:,0]
+    model = xgboost.XGBClassifier()
+    history = model.fit(X_train, y_train)
     return (model, history)

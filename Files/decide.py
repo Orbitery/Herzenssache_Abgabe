@@ -1,16 +1,17 @@
 import numpy as np
 def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
-    """[summary]
+    """[Prediction results are analyzed. Each ECG signal is assigned a class by majority vote. This classification is then returned.
+        e.g. in an ECG signal 50 "A heartbeats" and 2 "O heartbeats" were detected, then the corresponding ECG signal is classified as "A". ]
 
     Args:
-        predicted ([type]): [description]
-        ecg_names ([type]): [description]
-        data_samples ([type]): [description]
-        data_names ([type]): [description]
-        is_binary_classifier (bool): [description]
+        predicted (list): [List with the probabilites of each class]
+        ecg_names (list): [List with the unique name of every ecg-signal]
+        data_samples (list): [List with Values of ecg-signal]
+        data_names (list): [List with the unique name of the ecg signal, which belongs to the heartbeats]
+        is_binary_classifier (bool): [shows if binary (True) or multilabel (False) classification is active]
 
     Returns:
-        [type]: [description]
+       predictions [list of tuples]: [Values of ECG-Predictions]
     """
 
     data_samples = np.array(data_samples)
@@ -22,19 +23,19 @@ def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
     x = 0
 
     if (is_binary_classifier==True):
-        for row in predicted: #Feststellen der wahrscheinlichsten Klasse
+        for row in predicted: #Determine the most probable class
             if predicted[x,0]>predicted[x,1]:
                 label_predicted.append("N")
             elif predicted[x,0]<predicted[x,1]:
                 label_predicted.append("A")
             else:
-                print("FEHLER")
+                print("Error")
             x = x + 1
         n_sum = 0
         a_sum = 0
         t = 0
 
-        for ecg_row in ecg_names: #Demokratischer Ansatz um EKG-Signale anhand der Herzschlag-Predictions einzuordnen
+        for ecg_row in ecg_names: #Democratic approach to classify ECG signals based on heartbeat predictions.
             for idx, y in enumerate(data_names):
                 if (ecg_row==y):
                     if (label_predicted[idx]=='N'):
@@ -53,12 +54,11 @@ def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
                     
 
 
-        for idx, name_row in enumerate(ecg_names): #Erstellen des finalen Returnwertes
+        for idx, name_row in enumerate(ecg_names): #Create the final predictions
             predictions.append((ecg_names[idx], label_predicted_democatric[idx]))
-        print("fertig")
 
     elif (is_binary_classifier == False):
-        for row in predicted:   #Feststellen der wahrscheinlichsten Klasse
+        for row in predicted:   #Determine the most probable class
             if (((predicted[x,0]>predicted[x,1]) and (predicted[x,0]> predicted[x,2]) and (predicted[x,0]>predicted[x,3]))):
                 label_predicted.append("N")
             elif (((predicted[x,1]>predicted[x,0]) and (predicted[x,1]> predicted[x,2]) and (predicted[x,1]>predicted[x,3]))):
@@ -68,7 +68,7 @@ def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
             elif (((predicted[x,3]>predicted[x,0]) and (predicted[x,3]> predicted[x,1]) and (predicted[x,3]>predicted[x,2]))):
                 label_predicted.append("~")
             else:
-                print("FEHLER")
+                print("Error")
             x = x + 1
         n_sum = 0
         a_sum = 0
@@ -76,7 +76,7 @@ def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
         t_sum = 0
 
         t = 0
-        for ecg_row in ecg_names:  #Demokratischer Ansatz um EKG-Signale anhand der Herzschlag-Predictions einzuordnen
+        for ecg_row in ecg_names:  #Democratic approach to classify ECG signals based on heartbeat predictions.
             for idx, y in enumerate(data_names):
                 if (ecg_row==y):
                     if (label_predicted[idx]=='N'):
@@ -104,8 +104,8 @@ def decider(predicted, ecg_names,data_samples,data_names, is_binary_classifier):
             t_sum = 0
 
                     
-        for idx, name_row in enumerate(ecg_names): #Erstellen des finalen Returnwertes
+        for idx, name_row in enumerate(ecg_names): #Create the final predictions
             predictions.append((ecg_names[idx], label_predicted_democatric[idx]))
-        print("fertig")
+        print("Predictions are created")
     return (predictions)     
         
