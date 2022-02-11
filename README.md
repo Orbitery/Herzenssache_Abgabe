@@ -9,9 +9,9 @@ abc
 
 Die erforderlichen Abhängigkeiten können mit dem folgenden Befehl installiert werden:
 ```
-git clone https://github.com/ChristophReich1996/ECG_Classification
+git clone xyz
 cd ECG_Classification
-pip install --no-deps -r requirements.txt -f https://download.pytorch.org/whl/torch_stable.html
+pip install --no-deps -r requirements.txt -f 
 cd ecg_classification/pade_activation_unit/cuda
 python setup.py install
 cd ../../../
