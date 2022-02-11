@@ -30,7 +30,7 @@ Binäres Problem:
 Multi-Class Problem:
 - python predict_pretrained.py --model_name CNN_multi
 
-## Verbesserungen
+## Daten
 
 - Beispiel-Readme auf Englisch hinzufügen
 - Einstellungen im Text-Editor ausführlicher beschreiben
