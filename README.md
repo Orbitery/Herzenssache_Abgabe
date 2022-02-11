@@ -30,7 +30,8 @@ Binäres Problem:
 Multi-Class Problem:
 - python predict_pretrained.py --model_name CNN_multi
 
-To run custom training the `train.py` script can be used. This script takes the following commands:
+
+Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt.:
 
 | Argument | Default Value | Info |
 | --- | --- | --- |
