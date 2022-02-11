@@ -46,7 +46,7 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 | `--pca_active` | False | Binäre Darstellung. Option, ob Hauptkomponentenanalyse verwendet wird oder nicht. |
 | `--epochs` | 10 | Anzahl von Epochen beim Traininieren des Modells. |
 | `--batch_size` | 512 | Gibt die Batchsize zum Trainieren des Modells an. |
-| `--treesize | 50 | Gibt die Anzahl der Bäume des RandomForrest an |
+| `--treesize` | 50 | Gibt die Anzahl der Bäume des RandomForrest an |
 
 
 Die Dateien
