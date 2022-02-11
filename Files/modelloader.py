@@ -22,7 +22,10 @@ def modelload(is_binary_classifier,model_name):
         elif (model_name=="RandomForrest"):
             model = joblib.load("./RF_bin/random_forest.joblib")
         elif(model_name=="XGboost"):
-            model = joblib.load("./xg_bin/xgboost.joblib")
+            try:
+                model = joblib.load("./xg_bin/xgboost.joblib")
+            except:
+                print("Loading of XGBoost Model failed")
     elif(is_binary_classifier ==False):
         if (model_name == "CNN"):
             model = load_model("./CNN_multi/model_multi.hdf5")
@@ -33,7 +36,10 @@ def modelload(is_binary_classifier,model_name):
         elif(model_name=="Resnet"):
             model = load_model("./Resnet_multi/model_multi.hdf5")     
         elif(model_name=="XGboost"):
-            model = joblib.load("./xg_multi/xgboost.joblib")
+            try:
+                model = joblib.load("./xg_multi/xgboost.joblib")
+            except:
+                print("Loading of XGBoost Model failed")
 
 
     print ("Model loaded")

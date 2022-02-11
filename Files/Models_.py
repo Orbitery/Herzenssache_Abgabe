@@ -91,7 +91,7 @@ def LSTM(X_train, y_train, X_test, y_test, epochs_, batchsize):
     print(history.history.keys())
     return (model, history)
 
-def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize):
+def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize, treesize_):
     """[Function for the Random Forrest Classifier, which loads the Model]
 
     Args:
@@ -112,7 +112,7 @@ def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize):
     X_test = X_test[:,:,0]
 
     #cross validation
-    m = RandomForestClassifier(n_jobs=-1)
+    m = RandomForestClassifier(n_jobs=treesize_)
     history = m.fit(X_train, y_train)
     loss = metrics.log_loss(y_test,m.predict_proba(X_test))
     print("Loss is {}".format(loss))

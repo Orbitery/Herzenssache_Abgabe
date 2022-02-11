@@ -27,6 +27,7 @@ from keras.models import load_model
 
 from decide import *
 from modelloader import *
+from pca_predicter import *
 
 
 ###Signatur der Methode (Parameter und Anzahl return-Werte) darf nicht verändert werden
@@ -55,7 +56,7 @@ def predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[st
 
     #------------------------------------------------------------------------------
     # Euer Code ab hier 
-    is_binary_classifier = True 
+
     #Load Model 
     model = modelload(is_binary_classifier,model_name)
 
