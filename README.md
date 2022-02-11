@@ -16,10 +16,10 @@ cd ../../../
 ## Funktionen
 
 Binäres Problem:
-- python `predict_pretrained.py´ `--model_name´ CNN_bin `predict_pretrained.py´`predict_pretrained.py´
+- python `predict_pretrained.py --model_name´ CNN_bin 
 
 Multi-Class Problem:
-- python `predict_pretrained.py´ `--model_name´ CNN_multi
+- python `predict_pretrained.py --model_name´ CNN_multi
 
 
 Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt:
