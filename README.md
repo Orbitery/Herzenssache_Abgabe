@@ -54,7 +54,7 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 ## Daten
 
 Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von 
-[Maurice Rohr (https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius) verwendet.
+[Maurice Rohr] (https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius) verwendet.
 
 ## Verweise
 
