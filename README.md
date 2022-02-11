@@ -62,7 +62,7 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 ```
 [2] Resnet Architektur: {De Roever 2020,
-        Titel={{Using ResNet for ECG time-series data}},
+        Titel={{Replication study of "ECG Heartbeat Classification: A Deep Transferable Representation}},
         Autor={Sanne de Roever},
         Veröffentlichung={https://github.com/spdrnl/ecg/blob/master/ECG.ipynb, Aufruf:12.01.2022},
         Jahr={2020}
