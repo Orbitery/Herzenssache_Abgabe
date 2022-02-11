@@ -7,10 +7,9 @@ Die erforderlichen packages können aus der [`requirements.txt`](https://github.
 Die erforderlichen Abhängigkeiten können mit dem folgenden Befehl installiert werden:
 ```
 git clone xyz
-cd ECG_Classification
-pip install --no-deps -r requirements.txt -f 
-cd ecg_classification/pade_activation_unit/cuda
-python setup.py install
+cd Herzenssache_finale_Abgabe
+pip install -r requirements.txt -f 
+
 cd ../../../
 ```
 ## Funktionen
