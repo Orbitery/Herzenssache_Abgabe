@@ -60,3 +60,4 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 
 - Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
 - Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
