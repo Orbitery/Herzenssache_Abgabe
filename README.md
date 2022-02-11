@@ -13,12 +13,6 @@ cd ecg_classification/pade_activation_unit/cuda
 python setup.py install
 cd ../../../
 ```
-## Verwendung
-
-1. Repository klonen `git clone https://...`
-2. README bearbeiten `subl README.md`
-3. Änderungen einchecken `git add README.md` und committen `git commit -m "Update README"`
-
 ## Funktionen
 
 Binäres Problem:
@@ -32,11 +26,11 @@ Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trai
 
 | Argument | Default  Value | Info |
 | --- | --- | --- |
-| `--modelname` | Resnet | ---. |
-| `--bin` | True | Binäre Darstellung. ---. |
-| `--pca_active` | False | Binäre Darstellung. ---. |
-| `--epochs` | 10 | Ein Vorwärtsdurchlauf und ein Rückwärtsdurchlauf aller Trainingsbeispiele. |
-| `--batch_size` | 512 | Die Anzahl der Trainingsbeispiele in einem Vorwärts-/Rückwärtsdurchlauf. |
+| `--modelname` | Resnet | Auswahl von verschiedenen Modellen anhand von Modellname. |
+| `--bin` | True | Binäre Darstellung. Unterscheidung zwischen binärer Klassifizierer und Multilabel. |
+| `--pca_active` | False | Binäre Darstellung. Option, ob Hauptkomponentenanalyse verwendet wird oder nicht. |
+| `--epochs` | 10 | Anzahl von Epochen beim Traininieren des Modells. |
+| `--batch_size` | 512 | Gibt die Batchsize zum Trainieren des Modells an. |
 
 
 Die Dateien
@@ -59,5 +53,3 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 - Resnet Quelle (Idee: https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3 , Architecture / Codeursprung: https://github.com/spdrnl/ecg/blob/master/ECG.ipynb
 - Paper CNN Ansatz ("ECG Heartbeat Classification Using Convolutional Neural Networks" von Xu und Liu, 2020)
-- Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
-- Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
