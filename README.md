@@ -2,7 +2,7 @@
 Dieses Repository enthält den Code für die automatische Erkennung von Vorhofflimmern aus kurzen EKG-Segmenten mittels Deep Learning. Diese Arbeit wurde im Rahmen des Wettbewerbs "Wettbewerb künstliche Intelligenz in der Medizin" an der TU Darmstadt (KIS*MED, Prof. Hoog Antink) durchgeführt.
 
 ## Erste Schritte
-Die erforderlichen packages können aus der [`requirements.txt`] (https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/requirements.txt) Datei entnommen werden.
+Die erforderlichen packages können aus der [requirements.txt](https://github.com/Orbitery/Herzenssache_Abgabe/blob/main/Files/requirements.txt) Datei entnommen werden.
 ### Installation
 abc
 ### Abhängigkeiten
