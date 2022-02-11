@@ -32,7 +32,7 @@ Resnet:
 Das Resnet wurde nach der Idee von Sanne de Roever [1] und mit Teilen des Codes von [3] entwickelt.
 
 Binäres Problem:
-- python `predict_pretrained.py` `--model_name` Resnet `--is_binary_classifier` `True`
+- python `predict_pretrained.py` `--model_name` `Resnet` `--is_binary_classifier` `True`
 
 Multi-Class Problem:
 - python `predict_pretrained.py` `--model_name` `Resnet` `--is_binary_classifier` `False`
