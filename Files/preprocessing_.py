@@ -23,18 +23,16 @@ from sklearn.decomposition import PCA
 
 
 def BP_Filter(ecg_lead): 
+    """[A bandpass is applied. 
+    For this purpose, particularly high frequencies and particularly low frequencies are cut.
+     This is to generate a resilience against errors in the data and an increased generalizability.]
 
-    '''
-    Parameters
-    ----------
-    ecg_leads : list of numpy-Arrays
-        EKG-Signale.
+    Args:
+        ecg_lead ([list of numpy-Arrays]): [ECG signal]
 
-    Returns
-    -------
-    predictions : list of tuples
-        ecg_name und eure Diagnose
-    '''
+    Returns:
+        ecg_lead [list of numpy-Arrays]: [ECG signal]
+    """
 
 
     fs = 300  # Sampling frequency
@@ -49,39 +47,45 @@ def BP_Filter(ecg_lead):
     return ecg_lead
 
 def Scaler(ecg_lead):
+    """[The ECG signal is randomly stretched and compressed.
+     This is to o create greater diversity in the training data and 
+     generate a better generalizability of the model.]
 
-    '''
-    Parameters
-    ----------
-    ecg_leads : list of numpy-Arrays
-        EKG-Signale.
+    Args:
+        ecg_lead ([list of numpy-Arrays]): [ECG signal]
 
-    Returns
-    -------
-    predictions : list of tuples
-        ecg_name und eure Diagnose
-    '''
+    Returns:
+        ecg_lead [list of numpy-Arrays]: [ECG signal]
+    """
+  
 
-
-    number = np.random.uniform(low=0.0, high=1.0, size=None)
-    ecg_lead = ecg_lead * number
+    number = np.random.uniform(low=0.0, high=1.0, size=None) #Generate a random number between 0 and 1
+    ecg_lead = ecg_lead * number #ECG signal is stretched / compressed
     return ecg_lead
 
 
 
 def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
-    """[summary]
+    """[Preprocessing of the data. The ECG signal is normalized and cut into pieces of length 600.
+        These pieces contain 2 heartbeats each and are added to train_samples. 
+        For this purpose, a category is assigned to each heartbeat pair in train_labels]
 
     Args:
-        ecg_leads ([type]): [description]
+        ecg_leads ([list of numpy-Arrays]): [ECG signal]
         ecg_labels ([type]): [description]
-        fs ([type]): [description]
+        fs ([int]): [Sampling Frequency]
         ecg_names ([type]): [description]
-        modelname ([type]): [description]
-        bin ([type]): [description]
+        modelname ([String]): [description]
+        bin ([String]): [description]
 
     Returns:
-        [type]: [description]
+        train_labels[type]: [description]
+        train_samples [type]: [description]
+        r_peaks_list [type]: [description]
+        X_train [type]: [description]
+        y_train [type]: [description]
+        X_test [type]: [description]
+        y_test [type]: [description]
     """
 
 
