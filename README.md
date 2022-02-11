@@ -51,7 +51,7 @@ stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-
 
 `predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]`
 
-In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResTNet enthalten. 
+In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResNet enthalten. 
 
 ## Daten
 
@@ -60,5 +60,8 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 ## Verweise
 
+-Resnet Quelle
+-XGBoost Quelle
+- Paper CNN Ansatz
 - Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
 - Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
