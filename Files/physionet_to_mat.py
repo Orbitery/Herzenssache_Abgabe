@@ -10,6 +10,17 @@ import scipy.io
 
 
 def load_raw_data(df, sampling_rate, path):
+    """[summary]
+
+    Args:
+        df ([type]): [description]
+        sampling_rate ([type]): [description]
+        path ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     if sampling_rate == 100:
         data = [wfdb.rdsamp(path+f) for f in df.filename_lr]
         print("1")
@@ -37,6 +48,15 @@ agg_df = pd.read_csv(path+'scp_statements.csv', index_col=0)
 agg_df = agg_df[agg_df.diagnostic == 1]
 
 def aggregate_diagnostic(y_dic):
+    """[summary]
+
+    Args:
+        y_dic ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     tmp = []
     for key in y_dic.keys():
         print("6")

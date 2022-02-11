@@ -5,7 +5,20 @@ import tensorflow as tf
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
 from sklearn import metrics
 
-def CNN_Model(X_train, y_train, X_test, y_test):
+def CNN_Model(X_train, y_train, X_test, y_test, epochs_, batchsize):
+    '''
+    Parameters
+    ----------
+    ecg_leads : list of numpy-Arrays
+        EKG-Signale.
+
+    Returns
+    -------
+    predictions : list of tuples
+        ecg_name und eure Diagnose
+    '''
+
+
     print("CNN Model was chosen")
     #Definieren der CNN Architektur. Hierbei wurde sich bei der Architektur an dem Paper "ECG Heartbeat Classification Using Convolutional Neural Networks" von Xu und Liu, 2020 orientiert. 
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
@@ -29,7 +42,7 @@ def CNN_Model(X_train, y_train, X_test, y_test):
                 loss=tf.keras.losses.categorical_crossentropy,
                 metrics=['accuracy'])
 
-    history = model.fit(X_train, y_train, epochs=3, batch_size=1024,validation_data=(X_test, y_test), callbacks=[callback])
+    history = model.fit(X_train, y_train, epochs=epochs_, batch_size=batchsize,validation_data=(X_test, y_test), callbacks=[callback])
 
     score = model.evaluate(X_test, y_test)
     print("Accuracy Score: "+str(round(score[1],4)))
@@ -38,7 +51,20 @@ def CNN_Model(X_train, y_train, X_test, y_test):
     print(history.history.keys())
     return (model, history)
 
-def LSTM(X_train, y_train, X_test, y_test):
+def LSTM(X_train, y_train, X_test, y_test, epochs_, batchsize):
+    '''
+    Parameters
+    ----------
+    ecg_leads : list of numpy-Arrays
+        EKG-Signale.
+
+    Returns
+    -------
+    predictions : list of tuples
+        ecg_name und eure Diagnose
+    '''
+
+
     print("LSTM Model was chosen")
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
     model = models.Sequential()
@@ -49,7 +75,7 @@ def LSTM(X_train, y_train, X_test, y_test):
                 loss=tf.keras.losses.binary_crossentropy,
                 metrics=['accuracy'])
 
-    history = model.fit(X_train, y_train, epochs=2, batch_size=1024,validation_data=(X_test, y_test), callbacks=[callback])
+    history = model.fit(X_train, y_train, epochs=epochs_, batch_size=batchsize,validation_data=(X_test, y_test), callbacks=[callback])
     model.build()
     model.summary()
     score = model.evaluate(X_test, y_test)
@@ -59,7 +85,21 @@ def LSTM(X_train, y_train, X_test, y_test):
     print(history.history.keys())
     return (model, history)
 
-def RandomForrest(X_train, y_train, X_test, y_test):
+def RandomForrest(X_train, y_train, X_test, y_test, epochs_, batchsize):
+
+    '''
+    Parameters
+    ----------
+    ecg_leads : list of numpy-Arrays
+        EKG-Signale.
+
+    Returns
+    -------
+    predictions : list of tuples
+        ecg_name und eure Diagnose
+    '''
+
+
     print("Random Forrest Model was chosen")
     X_train = X_train[:,:,0]
     X_test = X_test[:,:,0]
@@ -73,14 +113,14 @@ def RandomForrest(X_train, y_train, X_test, y_test):
     print ("Acc is {}".format(accuracy))
     return (m, history)
 
-def Resnet(X_train, y_train, X_test, y_test):
+def Resnet(X_train, y_train, X_test, y_test, epochs_, batchsize):
     print("Resnet Model was chosen")
     callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
-    def get_resnet_model(categories=2):
+    def get_resnet_model():
         def residual_block(X, kernels, stride):
-            out = tf.keras.layers.Conv1D(kernels, stride, padding='same')(X)
+            out = tf.keras.layers.Conv1D(32, 5, padding='same')(X)
             out = tf.keras.layers.ReLU()(out)
-            out = tf.keras.layers.Conv1D(kernels, stride, padding='same')(out)
+            out = tf.keras.layers.Conv1D(32, 5, padding='same')(out)
             out = tf.keras.layers.add([X, out])
             out = tf.keras.layers.ReLU()(out)
             out = tf.keras.layers.MaxPool1D(5, 2)(out)
@@ -90,12 +130,12 @@ def Resnet(X_train, y_train, X_test, y_test):
         stride = 5
 
         inputs = tf.keras.layers.Input(shape=(X_train.shape[1],1))
-        X = tf.keras.layers.Conv1D(kernels, stride)(inputs)
-        X = residual_block(X, kernels, stride)
-        X = residual_block(X, kernels, stride)
-        X = residual_block(X, kernels, stride)
-        X = residual_block(X, kernels, stride)
-        X = residual_block(X, kernels, stride)
+        X = tf.keras.layers.Conv1D(32, 5)(inputs)
+        X = residual_block(X, 32, 5)
+        X = residual_block(X, 32, 5)
+        X = residual_block(X, 32, 5)
+        X = residual_block(X, 32, 5)
+        X = residual_block(X, 32, 5)
         X = tf.keras.layers.Flatten()(X)
         X = tf.keras.layers.Dense(32, activation='relu')(X)
         X = tf.keras.layers.Dense(32, activation='relu')(X)
@@ -108,7 +148,7 @@ def Resnet(X_train, y_train, X_test, y_test):
     model.compile(optimizer='adam', loss=tf.keras.losses.categorical_crossentropy, metrics=['accuracy'])
 
 
-    history = model.fit(X_train, y_train, epochs=3,validation_data=(X_test, y_test), batch_size=1028, callbacks=[callback])
+    history = model.fit(X_train, y_train, epochs=epochs_,validation_data=(X_test, y_test), batch_size=batchsize, callbacks=[callback])
     model.build(input_shape=(X_train.shape[1],1))
     model.summary()
     score = model.evaluate(X_test, y_test)

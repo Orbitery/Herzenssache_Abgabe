@@ -23,6 +23,20 @@ from sklearn.decomposition import PCA
 
 
 def BP_Filter(ecg_lead): 
+
+    '''
+    Parameters
+    ----------
+    ecg_leads : list of numpy-Arrays
+        EKG-Signale.
+
+    Returns
+    -------
+    predictions : list of tuples
+        ecg_name und eure Diagnose
+    '''
+
+
     fs = 300  # Sampling frequency
 
     fc = 30  # Cut-off frequency of the filter
@@ -35,6 +49,20 @@ def BP_Filter(ecg_lead):
     return ecg_lead
 
 def Scaler(ecg_lead):
+
+    '''
+    Parameters
+    ----------
+    ecg_leads : list of numpy-Arrays
+        EKG-Signale.
+
+    Returns
+    -------
+    predictions : list of tuples
+        ecg_name und eure Diagnose
+    '''
+
+
     number = np.random.uniform(low=0.0, high=1.0, size=None)
     ecg_lead = ecg_lead * number
     return ecg_lead
@@ -42,6 +70,21 @@ def Scaler(ecg_lead):
 
 
 def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
+    """[summary]
+
+    Args:
+        ecg_leads ([type]): [description]
+        ecg_labels ([type]): [description]
+        fs ([type]): [description]
+        ecg_names ([type]): [description]
+        modelname ([type]): [description]
+        bin ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
+
     detectors = Detectors(fs)                                 # Initialisierung des QRS-Detektors
 
     train_labels = []
@@ -85,6 +128,8 @@ def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
         print("Start Multilabel Data Preprocessing")
         for idx, ecg_lead in enumerate(ecg_leads):
             ecg_lead = ecg_lead.astype('float')  # Wandel der Daten von Int in Float32 Format für CNN später
+            ecg_lead = (ecg_lead - ecg_lead.mean()) 
+            ecg_lead = ecg_lead / (ecg_lead.std() + 1e-08) 
             r_peaks = detectors.hamilton_detector(ecg_lead)     # Detektion der QRS-Komplexe
             for r_peak in r_peaks:
                 if r_peak > 150 and r_peak + 450 <= len(ecg_lead):
