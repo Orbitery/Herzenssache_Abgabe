@@ -51,5 +51,33 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 ## Verweise
 
-- Resnet Quelle (Idee: https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3 , Architecture / Codeursprung: https://github.com/spdrnl/ecg/blob/master/ECG.ipynb
-- Paper CNN Ansatz ("ECG Heartbeat Classification Using Convolutional Neural Networks" von Xu und Liu, 2020)
+- Resnet Quelle (Idee: https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3 , 
+- Architektur / Codeursprung: https://github.com/spdrnl/ecg/blob/master/ECG.ipynb
+```
+- [1] Resnet Ansatz: {De Roever 2020,
+        Titel={{Using ResNet for ECG time-series data}},
+        Autor={Sanne de Roever},
+        Veröffentlichung={https://towardsdatascience.com/using-resnet-for-time-series-data-4ced1f5395e3, Aufruf:12.01.2022},
+        Jahr={2020},
+}
+```
+
+```
+- [2] Resnet Architektur: {De Roever 2020,
+        Titel={{Using ResNet for ECG time-series data}},
+        Autor={Sanne de Roever},
+        Veröffentlichung={https://github.com/spdrnl/ecg/blob/master/ECG.ipynb, Aufruf:12.01.2022},
+        Jahr={2020}
+}
+```
+
+```
+- [3] CNN Ansatz: {Liu2017,
+        Titel={{ECG Heartbeat Classification UsingConvolutional Neural Networks}},
+        Autor={Xuexiang Xuand, Hongxing Liu},
+        Veröffentlichung={IEEE Access (Volume:8)},
+        Seiten={8614-8619},
+        Jahr={2020},
+        Organisation={IEEE}
+}
+```
