@@ -30,6 +30,26 @@ Binäres Problem:
 Multi-Class Problem:
 - python predict_pretrained.py --model_name CNN_multi
 
+To run custom training the `train.py` script can be used. This script takes the following commands:
+
+| Argument | Default Value | Info |
+| --- | --- | --- |
+| `--cuda_devices` | "0" | String of cuda device indexes to be used. Indexes must be separated by a comma. |
+| `--no_data_aug` | False | Binary flag. If set no data augmentation is utilized. |
+| `--data_parallel` | False | Binary flag. If set data parallel is utilized. |
+| `--epochs` | 100 | Number of epochs to perform while training. |
+| `--lr` | 1e-03 | Learning rate to be employed. |
+| `--physio_net` | False | Binary flag. Utilized PhysioNet dataset instead of default one. |
+| `--batch_size` | 24 | Number of epochs to perform while training. |
+| `--dataset_path` | False | Path to dataset. |
+| `--network_config` | "ECGCNN_M" | Type of network configuration to be utilized. |
+| `--load_network` | None | If set given network (state dict) is loaded. |
+| `--no_signal_encoder` | False | Binary flag. If set no signal encoder is utilized. |
+| `--no_spectrogram_encoder` | False | Binary flag. If set no spectrogram encoder is utilized. |
+| `--icentia11k` | False | Binary flag. If set icentia11k dataset is utilized. |
+| `--challange` | False | Binary flag. If set challange split is utilized. |
+| `--two_classes` | False | Binary flag. If set two classes are utilized. Can only used with PhysioNet dataset and challange flag. |
+
 ## Daten
 
 - Beispiel-Readme auf Englisch hinzufügen
