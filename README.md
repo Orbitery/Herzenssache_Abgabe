@@ -56,11 +56,11 @@ Die Dateien
  - wettbewerb.py
  - score.py
 
-stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von [Maurice Rohr](https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius). Die Funktion predict_labels in predict.py beinhaltet das folgende Interface, welches für die Evaluierung verwendet wird.
+stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-2010-pj) von [Maurice Rohr](https://github.com/MauriceRohr) und [Prof. Hoog Antink](https://github.com/hogius). Die Funktion `predict_labels` in [`predict.py`](predict.py) beinhaltet das folgende Interface, welches für die Evaluierung verwendet wird.
 
-predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]
+`predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]`
 
-In model_name sind die Modelle CNN, LSTM, Random Forest & ResTNet enthalten. 
+In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResTNet enthalten. 
 
 ## Daten
 
