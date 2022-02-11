@@ -113,8 +113,8 @@ def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
             if (line_count % 100)==0:
                 print(f"{line_count} Dateien wurden verarbeitet.")
             if line_count == 200:  #For test purposes, less data can be used here.
-                break
-                #pass
+                #break
+                pass
 
         tf.keras.layers.Softmax(axis=-1)
         if(modelname=="CNN" or modelname=="LSTM" or modelname=="Resnet" or modelname=="XGboost"): 
@@ -149,8 +149,8 @@ def Preprocessing(ecg_leads,ecg_labels,fs,ecg_names,modelname,bin):
                 print(f"{line_count} Dateien wurden verarbeitet.")
             
             if line_count == 100:     #For test purposes, less data can be used here.
-                break
-                #pass
+                #break
+                pass
 
 
         if(modelname=="CNN" or modelname=="LSTM"  or modelname=="Resnet" or modelname=="XGboost"):
