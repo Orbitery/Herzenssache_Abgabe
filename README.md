@@ -32,10 +32,10 @@ Resnet:
 Das Resnet wurde nach der Idee von Sanne de Roever [1] und mit Teilen des Codes von [3] entwickelt.
 
 Binäres Problem:
-- python `predict_pretrained.py` `--model_name` Resnet --is_binary_classifier True
+- python `predict_pretrained.py` `--model_name` Resnet `--is_binary_classifier` `True`
 
 Multi-Class Problem:
-- python `predict_pretrained.py` `--model_name` Resnet --is_binary_classifier False
+- python `predict_pretrained.py` `--model_name` `Resnet` `--is_binary_classifier` `False`
 
 
 Für ein erfolgreiches benutzerdefiniertes Training wird die Verwendung des Trainingsskripts train.py empfohlen. Hierfür werden folgende Befehle benötigt:
