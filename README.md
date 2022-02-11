@@ -18,7 +18,7 @@ Insgesamt bietet unser Code folgende Modelle zur Auswahl:
 
 - CNN
 - LSTM
-- Resnet
+- ResNet
 - Random Forrest
 - XGBoost 
 
@@ -58,7 +58,7 @@ stammen aus dem Repository [18-ha-2010-pj](https://github.com/KISMED-TUDa/18-ha-
 
 `predict_labels(ecg_leads : List[np.ndarray], fs : float, ecg_names : List[str], model_name : str='model.npy',is_binary_classifier : bool=False) -> List[Tuple[str,str]]`
 
-In `model_name` sind die Modelle CNN, LSTM, Random Forest & ResNet enthalten. 
+In `model_name` sind die Modelle CNN, LSTM, Random Forest, XGBoost & ResNet enthalten. 
 
 ## Daten
 
