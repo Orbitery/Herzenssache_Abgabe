@@ -29,7 +29,7 @@ CNN:
 Das CNN wurde nach der Architektur von Xuexiang Xuand und Hongxing Liu [3] entwickelt.  
 
 Resnet:
-Das Resnet wurde nach der Idee von Sanne de Roever[1] und mit Teilen des Codes von [3] entwickelt.
+Das Resnet wurde nach der Idee von Sanne de Roever [1] und mit Teilen des Codes von [3] entwickelt.
 
 Binäres Problem:
 - python `predict_pretrained.py` `--model_name` CNN_bin 
