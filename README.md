@@ -62,4 +62,3 @@ Die Daten für das Training so wie die Auswertung der Modelle wurden aus dem Rep
 
 - Philosophie: [Art of README](https://github.com/noffle/art-of-readme)
 - Markdown-Beispiele von [Github Markdown](https://guides.github.com/features/mastering-markdown/) und [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-
